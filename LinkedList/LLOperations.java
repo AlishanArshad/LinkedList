@@ -1,16 +1,23 @@
 package LinkedList;
 
 public class LLOperations {
-    static class Node{
+    private int size;
+    LLOperations(){
+        this.size = 0;
+    }
+    class Node{
         String data;
         Node next;
+
 
 
         Node(String data){
             this.data = data;
             this.next = null;
+            size++;
         }
     }
+
     // Add First
     Node head;
     public void addFirst(String data){
@@ -22,6 +29,7 @@ public class LLOperations {
         newNode.next = head;
         head = newNode;
     }
+
     // Add Last
     public void addLast(String data){
         Node newNode = new Node(data);
@@ -34,6 +42,7 @@ public class LLOperations {
         }
         currNode.next = newNode;
     }
+
     // Print
     public void  printList(){
         Node currNode = head;
@@ -43,12 +52,48 @@ public class LLOperations {
         }
         System.out.println("Null");
     }
+
+    //delete
+    public void deleteFirst(){
+        if(head == null){
+            System.out.println("List is empty");
+            return;
+        }
+        head = head.next;
+        size--;
+    }
+    public void deleteLast(){
+        if(head == null){
+            System.out.println("List is empty");
+        }
+        Node secondLast = head;
+        assert head != null;
+        Node lastNode = head.next;
+        while (lastNode.next != null){
+            lastNode = lastNode.next;
+            secondLast = secondLast.next;
+        }
+        secondLast.next = null;
+        size--;
+
+    }
+
+    public int getSize() {
+        return size;
+    }
+
     public static void main(String[] args) {
         LLOperations list = new LLOperations();
         list.addFirst("is");
         list.addFirst("This");
+        list.addFirst("on");
         list.addLast("List");
         list.printList();
-
+        System.out.println(list.getSize());
+        list.deleteFirst();
+        list.printList();
+        list.deleteLast();
+        list.printList();
+        System.out.println(list.getSize());
     }
 }
